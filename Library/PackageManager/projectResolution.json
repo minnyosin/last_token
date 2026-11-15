@@ -1,0 +1,29 @@
+{
+  "context": {
+    "projectPath": "C:/Users/Min Nyo Sin/Documents/Codex/2026-11-14/i-am/outputs/Last Token/Packages",
+    "unityVersion": "6000.6.9f1"
+  },
+  "inputs": [
+    "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Packages\\manifest.json",
+    "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Packages\\packages-lock.json",
+    "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.9f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
+  ],
+  "outputs": {
+    "com.unity.modules.imgui@1.0.0": {
+      "name": "com.unity.modules.imgui",
+      "displayName": "IMGUI",
+      "resolvedPath": "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Library\\PackageCache\\com.unity.modules.imgui",
+      "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.modules.physics@1.0.0": {
+      "name": "com.unity.modules.physics",
+      "displayName": "Physics",
+      "resolvedPath": "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Library\\PackageCache\\com.unity.modules.physics",
+      "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    }
+  }
+}
