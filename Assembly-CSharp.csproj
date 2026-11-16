@@ -57,8 +57,8 @@
     <Compile Include="Assets\ChrisStuff\ChrisScript\DoorTriggerScript.cs" />
     <Compile Include="Assets\ChrisStuff\ChrisScript\PlayerMovement.cs" />
     <Compile Include="Assets\LastToken.cs" />
-    <Compile Include="Assets\ChrisStuff\ChrisScript\BillBoardScript.cs" />
     <Compile Include="Assets\ChrisStuff\ChrisScript\PlayerCameraChangeScript.cs" />
+    <Compile Include="Assets\ChrisStuff\ChrisScript\BillBoardScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TileColor.shader" />
