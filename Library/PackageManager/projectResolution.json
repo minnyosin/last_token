@@ -1,18 +1,28 @@
 {
   "context": {
-    "projectPath": "C:/Users/Min Nyo Sin/Documents/Codex/2026-11-14/i-am/outputs/Last Token/Packages",
+    "projectPath": "C:/Users/bendy/OneDrive/ドキュメント/GitHub/last_token/Packages",
     "unityVersion": "6000.6.9f1"
   },
   "inputs": [
-    "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Packages\\manifest.json",
-    "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Packages\\packages-lock.json",
+    "C:\\Users\\bendy\\OneDrive\\ドキュメント\\GitHub\\last_token\\Packages\\manifest.json",
+    "C:\\Users\\bendy\\OneDrive\\ドキュメント\\GitHub\\last_token\\Packages\\packages-lock.json",
     "C:\\Program Files\\Unity\\Hub\\Editor\\6000.6.9f1\\Editor\\Data\\Resources\\PackageManager\\BuiltInPackages\\BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
+    "com.unity.ide.visualstudio@2.0.29": {
+      "name": "com.unity.ide.visualstudio",
+      "displayName": "Visual Studio Editor",
+      "resolvedPath": "C:\\Users\\bendy\\OneDrive\\ドキュメント\\GitHub\\last_token\\Library\\PackageCache\\com.unity.ide.visualstudio@42af3a235209",
+      "fingerprint": "42af3a235209974579e5d38b6839611458b5a0dd",
+      "editorCompatibility": "2021.3.0a1",
+      "version": "2.0.29",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.modules.imgui@1.0.0": {
       "name": "com.unity.modules.imgui",
       "displayName": "IMGUI",
-      "resolvedPath": "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Library\\PackageCache\\com.unity.modules.imgui",
+      "resolvedPath": "C:\\Users\\bendy\\OneDrive\\ドキュメント\\GitHub\\last_token\\Library\\PackageCache\\com.unity.modules.imgui",
       "version": "1.0.0",
       "source": "builtin",
       "testable": false
@@ -20,7 +30,7 @@
     "com.unity.modules.physics@1.0.0": {
       "name": "com.unity.modules.physics",
       "displayName": "Physics",
-      "resolvedPath": "C:\\Users\\Min Nyo Sin\\Documents\\Codex\\2026-11-14\\i-am\\outputs\\Last Token\\Library\\PackageCache\\com.unity.modules.physics",
+      "resolvedPath": "C:\\Users\\bendy\\OneDrive\\ドキュメント\\GitHub\\last_token\\Library\\PackageCache\\com.unity.modules.physics",
       "version": "1.0.0",
       "source": "builtin",
       "testable": false

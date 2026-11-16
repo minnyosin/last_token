@@ -1,34 +1,156 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: C:/Users/Min Nyo Sin/Documents/Codex/2026-11-14/i-am/outputs/Last Token/Packages/manifest.json
+    m_FilePath: "C:/Users/bendy/OneDrive/\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8/GitHub/last_token/Packages/manifest.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639302419752005285
-    m_Hash: 2590334811
+      ticks: 639304073695149385
+    m_Hash: 1982111531
   m_LockFileStatus:
-    m_FilePath: C:/Users/Min Nyo Sin/Documents/Codex/2026-11-14/i-am/outputs/Last Token/Packages/packages-lock.json
+    m_FilePath: "C:/Users/bendy/OneDrive/\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8/GitHub/last_token/Packages/packages-lock.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639302414082334356
-    m_Hash: 918689912
+      ticks: 639304073695259660
+    m_Hash: 1726251413
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: C:/Users/Min Nyo Sin/Documents/Codex/2026-11-14/i-am/outputs/Last Token/Packages
+m_ProjectPath: "C:/Users/bendy/OneDrive/\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8/GitHub/last_token/Packages"
 m_EditorVersion: 6000.6.9f1 (8c45277fb9c5)
 m_ResolvedPackages:
+- packageId: com.unity.ide.visualstudio@2.0.29
+  testable: 0
+  isDirectDependency: 1
+  isInstalled: 1
+  version: 2.0.29
+  source: 1
+  resolvedPath: "C:\\Users\\bendy\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\last_token\\Library\\PackageCache\\com.unity.ide.visualstudio@42af3a235209"
+  assetPath: Packages/com.unity.ide.visualstudio
+  name: com.unity.ide.visualstudio
+  displayName: Visual Studio Editor
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: Code editor integration for supporting Visual Studio as code editor for unity. Adds support for generating csproj files for intellisense purposes, auto discovery of installations, etc.
+  errors: []
+  versions:
+    all:
+    - 1.0.2
+    - 1.0.3
+    - 1.0.4
+    - 1.0.9
+    - 1.0.10
+    - 1.0.11
+    - 2.0.0
+    - 2.0.1
+    - 2.0.2
+    - 2.0.3
+    - 2.0.5
+    - 2.0.7
+    - 2.0.8
+    - 2.0.9
+    - 2.0.11
+    - 2.0.12
+    - 2.0.14
+    - 2.0.15
+    - 2.0.16
+    - 2.0.17
+    - 2.0.18
+    - 2.0.20
+    - 2.0.21
+    - 2.0.22
+    - 2.0.23
+    - 2.0.25
+    - 2.0.26
+    - 2.0.27
+    - 2.0.28
+    - 2.0.29
+    compatible:
+    - 2.0.26
+    - 2.0.27
+    - 2.0.28
+    - 2.0.29
+    recommended: 2.0.29
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    isUnityRegistry: 1
+    capabilities: 7
+    configSource: 0
+    compliance:
+      status: 0
+      violations: []
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 639287738305050000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.ide.visualstudio@2.0/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
+    revision: 2f1341d571a7fc8600c9aade07412391b749d562
+    path: 
+  unityLifecycle:
+    version: 2.0.26
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+    isDiscoverable: 1
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"Integration:\n\n- Delegate project generation to Unity''s MSBuild pipeline when `UNITY_MSBUILD_ENABLED` is set, retaining design-time IDE analyzers, user-project capabilities, and editor configuration.\n- Remove stale generated MSBuild integration metadata when returning to regular compilation.\n- Remove the `com.unity.test-framework` dependency. The Test Explorer integration is now compiled only when the Test Framework package is present in the project."}'
+  signature:
+    status: 1
+    reason: Signature is ok
+    attestation:
+      format: archive
+      publishingChannel: unity
+      entitlementKeys: []
+      ownerOrgName: 
+      ownerOrgId: 
+      publisherName: 
+      artifactType: 0
+    errorCode: 
+  assetStore:
+    productId: 
+  fingerprint: 42af3a235209974579e5d38b6839611458b5a0dd
+  editorCompatibility:
+    compatibilityLevel: 0
+    minimumPackageVersion: 2.0.26
+    minimumUnityVersion: 2021.3
+  compliance:
+    status: 0
+    violation:
+      scopePatternExpression: 
+      message: 
+      readMoreLink: 
 - packageId: com.unity.modules.imgui@1.0.0
   testable: 0
   isDirectDependency: 1
   isInstalled: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\Min Nyo Sin\Documents\Codex\2026-11-14\i-am\outputs\Last Token\Library\PackageCache\com.unity.modules.imgui
+  resolvedPath: "C:\\Users\\bendy\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\last_token\\Library\\PackageCache\\com.unity.modules.imgui"
   assetPath: Packages/com.unity.modules.imgui
   name: com.unity.modules.imgui
   displayName: IMGUI
@@ -118,7 +240,7 @@ m_ResolvedPackages:
   isInstalled: 1
   version: 1.0.0
   source: 2
-  resolvedPath: C:\Users\Min Nyo Sin\Documents\Codex\2026-11-14\i-am\outputs\Last Token\Library\PackageCache\com.unity.modules.physics
+  resolvedPath: "C:\\Users\\bendy\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\GitHub\\last_token\\Library\\PackageCache\\com.unity.modules.physics"
   assetPath: Packages/com.unity.modules.physics
   name: com.unity.modules.physics
   displayName: Physics
