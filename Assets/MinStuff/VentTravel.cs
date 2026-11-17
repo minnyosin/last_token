@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class VentTravel : MonoBehaviour
 {
+
     public CharacterController controller;
 
     public Transform[] vents;
-   
+    public GameObject cineMachine1st;
+    public GameObject cineMachine3rd;
+    public Transform player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,19 +21,31 @@ public class VentTravel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+           
             TravelTo(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            
             TravelTo(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+          
             TravelTo(2);
         }
     }
     void TravelTo(int index)
     {
+        if (cineMachine1st.activeSelf && !cineMachine3rd.activeSelf)
+        {
+            cineMachine1st.SetActive(false);
+            cineMachine3rd.SetActive(true);
+            Vector3 e = player.eulerAngles;
+            e.y = 0f;
+            player.eulerAngles = e;
+
+        }
         if (controller == null || vents == null || index >= vents.Length)
         {
             return;

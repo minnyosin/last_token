@@ -2540,6 +2540,9 @@ MonoBehaviour:
   - {fileID: 1865532103}
   - {fileID: 1269754931}
   - {fileID: 354906133}
+  cineMachine1st: {fileID: 589753632}
+  cineMachine3rd: {fileID: 733152506}
+  player: {fileID: 1608677229}
 --- !u!82 &1608677235
 AudioSource:
   m_ObjectHideFlags: 0
