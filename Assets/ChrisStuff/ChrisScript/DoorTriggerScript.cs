@@ -20,7 +20,7 @@ public class DoorTriggerScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("PlayerEnter");
+            //Debug.Log("PlayerEnter");
             StartCoroutine(DoorSlideDown());
         }
     }

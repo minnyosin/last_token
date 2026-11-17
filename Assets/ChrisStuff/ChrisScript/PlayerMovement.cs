@@ -12,14 +12,16 @@ public class PlayerMovement : MonoBehaviour
     float newhorizontalValue;
     Vector3 velocity;
 
-   [SerializeField] private InputActionReference interactionReference;
+    public AudioSource footStepAudio;
+
+  //[SerializeField] private InputActionReference interactionReference;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
     }
-    private void OnEnable()
+   /* private void OnEnable()
     {
         interactionReference.action.Enable();
         interactionReference.action.started += PlayerInteracted;
@@ -29,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         interactionReference.action.started -= PlayerInteracted;
         interactionReference.action.Disable();
-    }
+    }*/
     // Update is called once per frame
     void Update()
     {
@@ -48,11 +50,17 @@ public class PlayerMovement : MonoBehaviour
         if (move !=Vector3.zero)
         {
             playerAnim.SetBool("isWalking", true);
-
+            if (!footStepAudio.isPlaying)
+            {
+                footStepAudio.pitch = 2f;
+                footStepAudio.Play();
+            }
+           
         }
         else if(move==Vector3.zero) 
         {
             playerAnim.SetBool("isWalking", false);
+            footStepAudio.Stop();
         }
 
 
