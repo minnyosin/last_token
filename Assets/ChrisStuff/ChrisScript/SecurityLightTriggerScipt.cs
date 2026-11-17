@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-using NUnit.Framework;
+//using NUnit.Framework;
 public class SecurityLightTriggerScipt : MonoBehaviour
 {
     public List<GameObject> doors;
