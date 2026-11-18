@@ -14,8 +14,16 @@ public class SecurityLightTriggerScipt : MonoBehaviour
     public AudioSource alarmAudio;
     public AudioSource doorOpenAudio;
     public AudioSource doorCloseAudio;
+
+    public GameObject p;
+    public PlayerInteractor player;
     //public AudioSource alarmAudio;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        p = GameObject.FindGameObjectWithTag("Player");
+        player=p.GetComponent<PlayerInteractor>();
+    }
     void Start()
     {
        securityAnim.keepAnimatorStateOnDisable = true;
@@ -37,6 +45,7 @@ public class SecurityLightTriggerScipt : MonoBehaviour
     }
     IEnumerator DoorSlideDown()
     {
+        player.playerDetected = true;
         alarmAudio.Play();
         doorCloseAudio.Play();
         securityAnim.enabled = false;
@@ -60,5 +69,6 @@ public class SecurityLightTriggerScipt : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         securityAnim.enabled = true;
         collider.enabled = true;
+        player.playerDetected = false;
     }
 }
