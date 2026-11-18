@@ -13,6 +13,12 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void SetLook(float leftRightAngle, float upDownAngle)
+    {
+        xRotation = upDownAngle;
+        playerBody.rotation = Quaternion.Euler(0, leftRightAngle, 0);
+        transform.localRotation = Quaternion.Euler(upDownAngle, 0, 0);
+    }
     // Update is called once per frame
     void Update()
     {
