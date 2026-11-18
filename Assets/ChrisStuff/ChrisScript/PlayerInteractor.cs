@@ -14,6 +14,7 @@ public class PlayerInteractor: MonoBehaviour
     int ventIndex=-1;
     public AudioSource ventIn;
     public AudioSource ventOut;
+    public AudioSource screwSound;
     // private IInteractable ventInteractable;
 
 
@@ -33,6 +34,7 @@ public class PlayerInteractor: MonoBehaviour
         }
         if (collisioninfo.CompareTag("Screwdriver"))
         {
+            screwSound.Play();
             Debug.Log("Screwdriver");
          
             Destroy(collisioninfo.gameObject);
