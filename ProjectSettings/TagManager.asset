@@ -8,6 +8,7 @@ TagManager:
   - TokenMachine
   - Screwdriver
   - CameraMachine
+  - Vent
   layers:
   - Default
   - TransparentFX

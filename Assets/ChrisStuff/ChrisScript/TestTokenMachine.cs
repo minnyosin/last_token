@@ -6,10 +6,12 @@ public class TestTokenMachine : MonoBehaviour, IInteractable
 {
     public TextMeshProUGUI UIText;
     public Animator textAnim;
+    public Animator exitDoor;
     public GameObject p;
     public PlayerInteractor player;
     public AudioSource insertAudio;
     int tokenContain = 0;
+    bool stopLoop=false;
    // public GameObject bulletEffect;
     void Awake()
     {
@@ -27,7 +29,13 @@ public class TestTokenMachine : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if (tokenContain == 4)
+        {
+            if (stopLoop) { return; }
+
+            exitDoor.SetBool("isExitOpen", true);
+            stopLoop = true;
+        }
     }
     IEnumerator FillingToken()
     {
