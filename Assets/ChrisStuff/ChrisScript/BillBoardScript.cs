@@ -5,6 +5,7 @@ public class BillBoardScript : MonoBehaviour
     [SerializeField] public bool freezeXZAxis = false;
     private void Update()
     {
+        if (Camera.main == null) return;
         if (freezeXZAxis)
         {
             transform.rotation = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);

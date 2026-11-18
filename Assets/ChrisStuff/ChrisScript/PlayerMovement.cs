@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer playerSprite;
     public CharacterController controller;
     public float speed = 6f;
+   // public float gravity = -9.8f;
 
     public Animator playerAnim;
   
@@ -42,8 +43,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
         controller.Move(move.normalized * speed * Time.deltaTime);
 
-        //velocity.y += gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
+       // velocity.y += gravity * Time.deltaTime;
+       // controller.Move(velocity * Time.deltaTime);
         //controller.Move(velocity*Time.deltaTime);
       
       

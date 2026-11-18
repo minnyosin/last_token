@@ -10,7 +10,7 @@ public class TestTokenMachine : MonoBehaviour, IInteractable
     public PlayerInteractor player;
     public AudioSource insertAudio;
     int tokenContain = 0;
-
+   // public GameObject bulletEffect;
     void Awake()
     {
         p = GameObject.FindGameObjectWithTag("Player");

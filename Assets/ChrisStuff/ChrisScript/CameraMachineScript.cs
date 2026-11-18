@@ -8,6 +8,8 @@ public class CameraMachineScript : MonoBehaviour, IInteractable
     public GameObject p;
     public PlayerInteractor player;
     public AudioSource electricAudio;
+    public AudioSource bangAudio;
+    public GameObject effect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -32,10 +34,12 @@ public class CameraMachineScript : MonoBehaviour, IInteractable
     }
     IEnumerator DisablingCamera()
     {
+        Instantiate(effect, transform.position, Quaternion.identity);
         player.hideScrewdriverImage();
         player.holdingScrewdriver = false;
         //collider.SetActive(false);
         electricAudio.Play();
+        bangAudio.Play();
         for (int i = 0; i < camera.Count; i++)
         {
             Animator camAnim = camera[i].GetComponent<Animator>();

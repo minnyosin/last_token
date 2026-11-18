@@ -138,6 +138,7 @@ public class VentTravel : MonoBehaviour
 
     void ExitVent()
     {
+        Vector3 offset = new Vector3(0, -2f, 0);
         controller.transform.position = vents[currentVent].exitPoint.position;
 
         mouseLook.SetLook(leftRight, upDown);
