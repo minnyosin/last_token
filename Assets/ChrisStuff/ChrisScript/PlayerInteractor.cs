@@ -69,7 +69,8 @@ public class PlayerInteractor: MonoBehaviour
         {
             footStep.Stop();
         }
-     
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         playerCollider.enabled = false;
         GameOverScreen.SetActive(true);
         RedScreen.SetActive(true);
@@ -92,6 +93,9 @@ public class PlayerInteractor: MonoBehaviour
     }
     IEnumerator RestartProcess()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         gameObject.transform.position = checkPointLocation;
         //playerCollider.enabled = false;
         buttonAnim.SetBool("isGameOver", false);
