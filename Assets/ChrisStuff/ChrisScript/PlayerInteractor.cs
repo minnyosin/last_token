@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerInteractor: MonoBehaviour
 {
+    public GameObject cineMachine1st;
+    public GameObject cineMachine3rd;
 
     public int carriedTokens;
     public bool holdingScrewdriver=false;
@@ -11,6 +13,7 @@ public class PlayerInteractor: MonoBehaviour
     public GameObject screwDriverUI;
     private IInteractable currentInteractable;
     public VentInteractionScript Vent;
+    public PlayerCameraChangeScript PlayerCameraChange;
     int ventIndex=-1;
     public AudioSource ventIn;
     public AudioSource ventOut;
@@ -111,8 +114,9 @@ public class PlayerInteractor: MonoBehaviour
                 ventOut.Play();
                 Vent.ExitVent();
             }
-            else if (playeratVent)
+            else if (playeratVent && !PlayerCameraChange.isSwitching)
             {
+                if (!cineMachine1st.activeSelf || cineMachine3rd.activeSelf) return;
                 ventIn.Play();
                 Vent.Process(ventIndex);
             }

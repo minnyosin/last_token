@@ -21,8 +21,8 @@ public class VentInteractionScript : MonoBehaviour
     public SpriteRenderer playerSprite;
     public PlayerInteractor playerInteractor;
 
-    public Camera mainCamera;
-    public Camera ventCamera;
+    public GameObject mainCamera;
+    public GameObject ventCamera;
     public GameObject cineMachine1st;
     public GameObject cineMachine3rd;
     public GameObject inventoryUI;
@@ -49,7 +49,7 @@ public class VentInteractionScript : MonoBehaviour
     void Start()
     {
         eyeUI.SetActive(false);
-        ventCamera.enabled = false;
+        ventCamera.SetActive(false);
         eyeAnim.keepAnimatorStateOnDisable = true;
     }
 
@@ -79,7 +79,7 @@ public void Process(int index)
     {
         if (index < 0 || index >= vents.Length) return;
         Debug.Log("isworkinghere");
-        if (!cineMachine1st.activeSelf || cineMachine3rd.activeSelf) return;
+        
         EnterVent(index);
 }
     void EnterVent(int number)
@@ -97,8 +97,8 @@ public void Process(int index)
        controller.enabled = false;
         playerSprite.enabled = false;
 
-        mainCamera.enabled = false;
-        ventCamera.enabled = true;
+        mainCamera.SetActive(false);
+        ventCamera.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -186,8 +186,8 @@ public void Process(int index)
         mouseLook.SetLook(leftRight, upDown);
 
         inventoryUI.SetActive(true);
-        ventCamera.enabled = false;
-        mainCamera.enabled = true;
+        mainCamera.SetActive(true);
+        ventCamera.SetActive(false);
         cineMachine1st.SetActive(true);
         cineMachine3rd.SetActive(false);
 
