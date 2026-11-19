@@ -1,4 +1,5 @@
 ﻿<Solution>
+<<<<<<< Updated upstream
   <Project Path="Unity.InputSystem.csproj" />
   <Project Path="Unity.Splines.Editor.csproj" />
   <Project Path="Unity.Splines.csproj" />
@@ -12,4 +13,7 @@
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="Unity.Settings.Editor.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
+=======
+  <Project Path="Assembly-CSharp.csproj" />
+>>>>>>> Stashed changes
 </Solution>
