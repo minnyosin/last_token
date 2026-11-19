@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
+    public LevelManagerScript LMS;
+    //public Transform enemy;
     public SpriteRenderer playerSprite;
     public CharacterController controller;
     public float speed = 6f;
@@ -15,9 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource footStepAudio;
 
-  //[SerializeField] private InputActionReference interactionReference;
+    //[SerializeField] private InputActionReference interactionReference;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        LMS=GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManagerScript>();
+    }
     void Start()
     {
 
@@ -36,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (!LMS.canInput) return;       //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 

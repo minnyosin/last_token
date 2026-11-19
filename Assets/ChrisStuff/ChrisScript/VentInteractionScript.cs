@@ -25,8 +25,10 @@ public class VentInteractionScript : MonoBehaviour
     public GameObject ventCamera;
     public GameObject cineMachine1st;
     public GameObject cineMachine3rd;
+    public GameObject tokenUI;
     public GameObject inventoryUI;
     public GameObject eyeUI;
+    //public GameObject ventTextUI;
     public Animator eyeAnim;
     public AudioSource footstep;
     public AudioSource ventClimbAudio;
@@ -48,6 +50,7 @@ public class VentInteractionScript : MonoBehaviour
 
     void Start()
     {
+      //  ventTextUI.SetActive(false);
         eyeUI.SetActive(false);
         ventCamera.SetActive(false);
         eyeAnim.keepAnimatorStateOnDisable = true;
@@ -90,11 +93,13 @@ public void Process(int index)
         }
         playerInteractor.playerInsideVent = true;
 
+       // ventTextUI.SetActive(true);
+        tokenUI.SetActive(false);
         inventoryUI.SetActive(false);
         movement.enabled = false;
         mouseLook.enabled = false;
         cameraSwitch.enabled = false;
-       controller.enabled = false;
+        controller.enabled = false;
         playerSprite.enabled = false;
 
         mainCamera.SetActive(false);
@@ -185,6 +190,8 @@ public void Process(int index)
 
         mouseLook.SetLook(leftRight, upDown);
 
+        //ventTextUI.SetActive(false);
+        tokenUI.SetActive(true);
         inventoryUI.SetActive(true);
         mainCamera.SetActive(true);
         ventCamera.SetActive(false);

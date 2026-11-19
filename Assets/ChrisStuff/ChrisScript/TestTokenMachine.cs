@@ -44,6 +44,7 @@ public class TestTokenMachine : MonoBehaviour, IInteractable
         tokenContain++;
         UIText.SetText($"{tokenContain}/4");
         textAnim.SetTrigger("isInsert");
+        player.UpdateToken();
         yield return null;
 
     }

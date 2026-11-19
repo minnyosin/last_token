@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
+
 
 //using NUnit.Framework;
 public class SecurityLightTriggerScipt : MonoBehaviour
@@ -17,10 +19,15 @@ public class SecurityLightTriggerScipt : MonoBehaviour
 
     public GameObject p;
     public PlayerInteractor player;
+
+    public GameObject NVM;
+    public NavMeshSurface nav;
     //public AudioSource alarmAudio;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        NVM= GameObject.FindGameObjectWithTag("NavMesh");
+        nav=NVM.GetComponent<NavMeshSurface>();
         p = GameObject.FindGameObjectWithTag("Player");
         player=p.GetComponent<PlayerInteractor>();
     }
@@ -57,6 +64,9 @@ public class SecurityLightTriggerScipt : MonoBehaviour
             doorsAnim.SetBool("isEnter", true);
         }
         //doorAnim.SetBool("isEnter", true);
+        
+        yield return new WaitForSeconds(0.6f);
+        nav.BuildNavMesh();
         yield return new WaitForSeconds(5f);
         doorOpenAudio.Play();   
         //AudioSource.PlayClipAtPoint(doorOpenAudio, doors[0].transform.position);
@@ -67,6 +77,7 @@ public class SecurityLightTriggerScipt : MonoBehaviour
         }
         // doorAnim.SetBool("isEnter", false);
         yield return new WaitForSeconds(0.6f);
+        nav.BuildNavMesh();
         securityAnim.enabled = true;
         collider.enabled = true;
         player.playerDetected = false;
