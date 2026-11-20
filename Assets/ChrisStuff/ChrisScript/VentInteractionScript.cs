@@ -213,6 +213,7 @@ public void Process(int index)
         cineMachine1st.SetActive(true);
         cineMachine3rd.SetActive(false);
 
+        playerInteractor.ClearVentTrigger();
         controller.enabled = true;
         movement.enabled = true;
         mouseLook.enabled = true;

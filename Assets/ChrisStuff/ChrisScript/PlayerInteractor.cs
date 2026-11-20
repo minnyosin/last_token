@@ -24,6 +24,7 @@ public class PlayerInteractor: MonoBehaviour
     public VentInteractionScript Vent;
     public PlayerCameraChangeScript PlayerCameraChange;
     int ventIndex=-1;
+    Collider currentVentTrigger;
     public AudioSource ventIn;
     public AudioSource ventOut;
     public AudioSource screwSound;
@@ -180,6 +181,7 @@ public class PlayerInteractor: MonoBehaviour
         {
             playeratVent = true;
             ventIndex = entrance.VentIndex;
+            currentVentTrigger = collisioninfo;
         }
 
         if (collisioninfo.TryGetComponent(out IInteractable interactable))
@@ -202,10 +204,9 @@ public class PlayerInteractor: MonoBehaviour
     private void OnTriggerExit(Collider collisioninfo)
     {
    
-        if (collisioninfo.TryGetComponent(out VentEntrance entrance) && entrance.VentIndex == ventIndex)
+        if (collisioninfo == currentVentTrigger)
         {
-            playeratVent = false;
-            ventIndex = -1;
+            ClearVentTrigger();
         }
 
         if (collisioninfo.TryGetComponent(out IInteractable interactable))
@@ -218,6 +219,35 @@ public class PlayerInteractor: MonoBehaviour
         }
 
      
+    }
+
+    void OnTriggerStay(Collider collisioninfo)
+    {
+        if (!playerInsideVent && collisioninfo.TryGetComponent(out VentEntrance entrance))
+        {
+            currentVentTrigger = collisioninfo;
+            playeratVent = true;
+            ventIndex = entrance.VentIndex;
+        }
+    }
+
+    public void ClearVentTrigger()
+    {
+        currentVentTrigger = null;
+        playeratVent = false;
+        ventIndex = -1;
+    }
+
+    public bool CanEnterVent()
+    {
+        if (currentVentTrigger == null || !currentVentTrigger.enabled ||
+            !currentVentTrigger.gameObject.activeInHierarchy ||
+            !currentVentTrigger.bounds.Intersects(playerCollider.bounds))
+        {
+            ClearVentTrigger();
+            return false;
+        }
+        return playeratVent;
     }
 
     private void SetPrompt(Collider c, bool state)
@@ -242,7 +272,7 @@ public class PlayerInteractor: MonoBehaviour
                 Vent.ExitVent();
                 StartCoroutine(VentTextUp());
             }
-            else if (playeratVent && !PlayerCameraChange.isSwitching)
+            else if (CanEnterVent() && !PlayerCameraChange.isSwitching)
             {
                 if (!cineMachine1st.activeSelf || cineMachine3rd.activeSelf) return;
                 ventIn.Play();
