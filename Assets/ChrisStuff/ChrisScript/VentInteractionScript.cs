@@ -13,7 +13,7 @@ public class VentInteractionScript : MonoBehaviour
     }
 
     public Vent[] vents;
-     public CharacterController controller;
+    public CharacterController controller;
     public Transform player;
     public PlayerMovement movement;
     public MouseLook mouseLook;

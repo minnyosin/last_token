@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ChrisStuff\ChrisScript\TestEnemyAIScript.cs" />
-    <Compile Include="Assets\ChrisStuff\ChrisScript\VentTravelTest.cs" />
     <Compile Include="Assets\MinStuff\TokenTest.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\ChrisStuff\ChrisScript\MouseLook.cs" />

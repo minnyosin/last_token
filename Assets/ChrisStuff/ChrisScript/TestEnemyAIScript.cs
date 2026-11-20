@@ -180,6 +180,12 @@ public class TestEnemyAIScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         enemyCollider = GetComponent<Collider>();
         interactor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteractor>();
+        GameObject[] points = GameObject.FindGameObjectsWithTag("PatrolPoint");
+        patrolPoints = new Transform[points.Length];
+        for (int i = 0; i < points.Length; i++)
+        {
+            patrolPoints[i] = points[i].transform;
+        }
     }
 
     void Update()
