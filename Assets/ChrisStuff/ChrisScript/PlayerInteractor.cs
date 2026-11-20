@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class PlayerInteractor: MonoBehaviour
 {
     public LevelManagerScript LMS;
@@ -42,7 +43,7 @@ public class PlayerInteractor: MonoBehaviour
     public GameObject GameOverScreen;
     public GameObject RedScreen;
     public Image blackScreen;
-    public TextMeshProUGUI gameOverText;
+    public Image gameOverText;
     public TextMeshProUGUI disText;
     public Animator buttonAnim;
     public AudioSource footStep;
@@ -113,6 +114,10 @@ public class PlayerInteractor: MonoBehaviour
         LMS.canInput = true;
         playerCollider.enabled = true;
         //yield return null;
+    }
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(0);
     }
     private void OnTriggerEnter(Collider collisioninfo)
     {

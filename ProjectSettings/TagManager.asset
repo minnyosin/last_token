@@ -15,6 +15,7 @@ TagManager:
   - FirstPersonView
   - TopDownView
   - LevelManager
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX
