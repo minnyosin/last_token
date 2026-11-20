@@ -6,7 +6,7 @@ public class MenuButton : MonoBehaviour
 {
     public GameObject mainPage;
     public GameObject helpPage;
-    public string gameScene = "Assets/MinStuff/MinTokenTest.unity";
+    public string gameScene = "Assets/ChrisStuff/TrueRealScene.unity";
 
     public AudioSource music;
     public AudioSource sounds;
@@ -92,11 +92,7 @@ public class MenuButton : MonoBehaviour
         {
             return;
         }
-#if UNITY_EDITOR
-        if(UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(gameScene) == null)
-#else
-        if(!Application.CanStreamedLevelBeLoaded(gameScene))
-#endif
+if(!Application.CanStreamedLevelBeLoaded(gameScene))
         {
             Debug.LogError("Check Game Scene on Menu Buttons. Also add the scene to the build scene list.");
             return;
@@ -138,16 +134,11 @@ public class MenuButton : MonoBehaviour
             yield return null;
         }
 
-#if UNITY_EDITOR
-        UnityEditor.SceneManagement.EditorSceneManager.LoadSceneInPlayMode(
-            gameScene,new LoadSceneParameters(LoadSceneMode.Single));
-#else
-        AsyncOperation load = SceneManager.LoadSceneAsync(gameScene);
+AsyncOperation load = SceneManager.LoadSceneAsync(gameScene);
         while(!load.isDone)
         {
             yield return null;
         }
-#endif
     }
 
     public void Quit()
@@ -162,3 +153,5 @@ public class MenuButton : MonoBehaviour
 #endif
     }
 }
+
+

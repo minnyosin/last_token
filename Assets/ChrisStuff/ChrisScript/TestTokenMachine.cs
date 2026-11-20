@@ -11,6 +11,8 @@ public class TestTokenMachine : MonoBehaviour, IInteractable
     public PlayerInteractor player;
     public AudioSource insertAudio;
     int tokenContain = 0;
+    public bool ExitReady { get { return tokenContain >= 4; } }
+    public int DepositedTokens { get { return tokenContain; } }
     bool stopLoop=false;
    // public GameObject bulletEffect;
     void Awake()

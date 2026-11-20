@@ -37,7 +37,8 @@ public class PlayerInteractor: MonoBehaviour
     public Animator tokenAnim;
     public Animator ventAnim;
 
-    Vector3 checkPointLocation= new Vector3(0,0,0);
+    Vector3 checkPointLocation;
+    bool dying;
 
     [Header("GameOver")]
     public GameObject GameOverScreen;
@@ -56,6 +57,7 @@ public class PlayerInteractor: MonoBehaviour
     }
     void Start()
     {
+        checkPointLocation = transform.position;
         Vent=GetComponent<VentInteractionScript>();
         GameOverScreen.SetActive(false);
         RedScreen.SetActive(false);
@@ -113,11 +115,12 @@ public class PlayerInteractor: MonoBehaviour
        // playerCollider.enabled = false;
         LMS.canInput = true;
         playerCollider.enabled = true;
+        dying = false;
         //yield return null;
     }
     public void QuitGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Assets/MinStuff/MainMenuPolished.unity");
     }
     private void OnTriggerEnter(Collider collisioninfo)
     {
@@ -127,18 +130,28 @@ public class PlayerInteractor: MonoBehaviour
             Debug.Log("TokenEarned");
             Destroy(collisioninfo.gameObject);
             carriedTokens++;
+            foreach (var enemy in FindObjectsByType<TestEnemyAIScript>(FindObjectsSortMode.None))
+            {
+                enemy.HearToken(transform.position);
+            }
             UpdateToken();
             if (collisioninfo.TryGetComponent(out Transform setPoint))
             {
                 Vector3 y= setPoint.position;
-                y.y = 0f;
+                y.y = transform.position.y;
                 setPoint.position = y;
                 checkPointLocation=setPoint.position;
             }
         }
         if (collisioninfo.CompareTag("Enemy"))
         {
-            if (playerInsideVent) return;
+            if (playerInsideVent || dying) return;
+            if (Physics.Linecast(transform.position + Vector3.up * 1.5f,
+                collisioninfo.transform.position + Vector3.up * 1.5f,1 << 7,QueryTriggerInteraction.Ignore))
+            {
+                return;
+            }
+            dying = true;
             playerDeathSound.Play();
             StartCoroutine(GameOver());
             Debug.Log("Player died");
@@ -335,3 +348,4 @@ public class PlayerInteractor: MonoBehaviour
     }
 }
 //fggf
+

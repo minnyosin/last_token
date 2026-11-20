@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MinStuff/MainMenuPolished.unity
+    guid: 05cf4fa8ade954a895b946e396111b80
+  - enabled: 1
+    path: Assets/ChrisStuff/TrueRealScene.unity
+    guid: 4c5885dd0e2bc2249aecb5d98fbc6d8b
   m_configObjects: {}

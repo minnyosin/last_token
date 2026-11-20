@@ -18,6 +18,11 @@ public class GameEndScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            TestTokenMachine machine = Object.FindAnyObjectByType<TestTokenMachine>();
+            if (machine != null && !machine.ExitReady)
+            {
+                return;
+            }
             if (playerisHere) return;
             StartCoroutine(GameEnd());
         }
@@ -27,6 +32,20 @@ public class GameEndScript : MonoBehaviour
     IEnumerator GameEnd()
     {
         playerisHere = true;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            var interactor = player.GetComponent<PlayerInteractor>();
+            if (interactor != null && interactor.LMS != null)
+            {
+                interactor.LMS.canInput = false;
+            }
+            var look = player.GetComponentInChildren<MouseLook>(true);
+            if (look != null) { look.enabled = false; }
+            var footsteps = player.GetComponent<PlayerMovement>();
+            if (footsteps != null && footsteps.footStepAudio != null) { footsteps.footStepAudio.Stop(); }
+        }
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -71,6 +90,7 @@ public class GameEndScript : MonoBehaviour
     public void QuitGame()
     {
         
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Assets/MinStuff/MainMenuPolished.unity");
     }
 }
+

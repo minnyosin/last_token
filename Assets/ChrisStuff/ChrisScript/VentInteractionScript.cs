@@ -43,6 +43,7 @@ public class VentInteractionScript : MonoBehaviour
     float leftRight;
     float upDown;
     float startingDirection;
+    bool inventoryWasVisible;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
 
@@ -83,6 +84,10 @@ public void Process(int index)
         if (index < 0 || index >= vents.Length) return;
         Debug.Log("isworkinghere");
         
+        if (playerInteractor.playerInsideVent || !canInput)
+        {
+            return;
+        }
         EnterVent(index);
 }
     void EnterVent(int number)
@@ -95,6 +100,7 @@ public void Process(int index)
 
        // ventTextUI.SetActive(true);
         tokenUI.SetActive(false);
+        inventoryWasVisible = inventoryUI.activeSelf;
         inventoryUI.SetActive(false);
         movement.enabled = false;
         mouseLook.enabled = false;
@@ -113,7 +119,7 @@ public void Process(int index)
 
     void FirstChangeVent(int number)
     {
-        if (number >= vents.Length)
+        if (number < 0 || number >= vents.Length)
         {
             return;
         }
@@ -139,11 +145,11 @@ public void Process(int index)
     IEnumerator ChangeVent(int number)
     {
         
-        if (number >= vents.Length)
+        if (number < 0 || number >= vents.Length)
         {
             yield break;
         }
-        if (number == currentVent)
+        if (!canInput || !playerInteractor.playerInsideVent || number == currentVent)
         {
             yield break;
         }
@@ -185,14 +191,23 @@ public void Process(int index)
 
   public  void ExitVent()
     {
-        Vector3 actualPos = new Vector3(vents[currentVent].exitPoint.position.x,0f, vents[currentVent].exitPoint.position.z);
+        if (!playerInteractor.playerInsideVent || currentVent < 0 || currentVent >= vents.Length)
+        {
+            return;
+        }
+        StopAllCoroutines();
+        canInput = true;
+        ventClimbAudio.Stop();
+        eyeAnim.SetBool("isClose", false);
+        eyeUI.SetActive(false);
+        Vector3 actualPos = vents[currentVent].exitPoint.position;
         player.transform.position = actualPos;
 
         mouseLook.SetLook(leftRight, upDown);
 
         //ventTextUI.SetActive(false);
         tokenUI.SetActive(true);
-        inventoryUI.SetActive(true);
+        inventoryUI.SetActive(inventoryWasVisible);
         mainCamera.SetActive(true);
         ventCamera.SetActive(false);
         cineMachine1st.SetActive(true);

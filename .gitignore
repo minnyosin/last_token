@@ -9,3 +9,19 @@ MemoryCaptures/
 .vs/
 *.csproj
 *.sln
+
+# Local gameplay backups and validation copies
+/GameplayWork/
+/GameplayBackup_*/
+/PitchOutput/
+/CaptureOutput/
+/CaptureValidation/
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.opendb
+*.VC.db
+.DS_Store
+Thumbs.db

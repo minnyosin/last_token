@@ -48,6 +48,7 @@ EditorSettings:
   m_CacheServerDownloadBatchSize: 128
   m_EnableEnlightenBakedGI: 0
   m_ReferencedClipsExactNaming: 1
-  m_ForceAssetUnloadAndGCOnSceneLoad: 1
+  m_ForceAssetUnloadAndGCOnSceneLoad: 0
   m_HideBuildProfileClassicPlatforms: 0
   m_UseLegacyHierarchy: 0
+

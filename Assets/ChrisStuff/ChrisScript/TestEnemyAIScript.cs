@@ -1,148 +1,3 @@
-/*using UnityEngine;
-using UnityEngine.AI;
-public class TestEnemyAIScript : MonoBehaviour
-{
-    public Transform enemy;
-    public SpriteRenderer enemySprite;
-    public NavMeshAgent agent;
-    public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
-    public Collider enemyCollider;
-
-    //patrol
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
-
-    public float sightRange;
-    public bool playerInSightRange;
-
-    public float maxPatrolTime = 3f;
-    float patrolTimer;
-    public PlayerInteractor interactor;
-    public Animator enemyAnim;
-    public bool isChasing = false;
-
-   // float lastX;
-   // Vector3 lastPos;
-    private void Awake()
-    {
-        enemy=GetComponent<Transform>();
-        enemySprite = GetComponentInChildren<SpriteRenderer>();
-        enemyAnim=GetComponentInChildren<Animator>();
-        player = GameObject.Find("Player").transform;
-        agent=GetComponent<NavMeshAgent>();
-        enemyCollider= GetComponent<Collider>();
-        interactor=GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteractor>();
-    }
-    private void Start()
-    {
-        //lastX = enemy.position.x;
-       // lastPos = enemy.position;
-    }
-    void Update()
-    {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        // playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        if (!playerInSightRange) Patrolling();
-        if (playerInSightRange&&!interactor.playerInsideVent) ChasePlayer();
-
-
-       // float currentx=transform.position.x;
-     
-       // enemySprite.flipX = currentx <lastX;
-        //lastX = currentx;
-
-       // Vector3 currentPos = transform.position;
-       // Vector3 dif = currentPos - lastPos;
-        //float realdif = dif.magnitude;
-        //if (realdif < 0.01||realdif==0)
-       // {
-            //enemyin idle state
-       // }
-        //if (horizontal != 0)
-            //playerSprite.flipX = horizontal < 0;
-            UpdateEnemySpriteSheet();
-    }
-    /*private void Patrolling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        //WalkPoint reached;
-        if (distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-    }*/
-/* public void UpdateEnemySpriteSheet()
- {
-     Vector3 vel=agent.velocity;
-     if (vel.magnitude < 0.1f)
-     {
-         enemyAnim.SetBool("isWalking", false);
-         // idle state
-         return;   
-     }
-     else
-     {
-         enemyAnim.SetBool("isWalking", true);
-     }
-     if (vel.x > 0.1f) enemySprite.flipX = false;
-     else if (vel.x < -0.1f) enemySprite.flipX = true;
-
- }
- private void Patrolling()
- {
-     isChasing = false;
-     if (!walkPointSet)
-     {
-         SearchWalkPoint();
-         patrolTimer = 0f;
-     }
-
-     if (walkPointSet)
-     {
-         agent.SetDestination(walkPoint);
-         patrolTimer += Time.deltaTime;
-
-         bool reached = !agent.pathPending &&
-                        agent.remainingDistance <= agent.stoppingDistance + 0.5f;
-         bool unreachable = !agent.pathPending &&
-                            agent.pathStatus != NavMeshPathStatus.PathComplete;
-         bool timedOut = patrolTimer > maxPatrolTime;
-
-         if (reached || unreachable || timedOut)
-             walkPointSet = false;
-     }
- }
- private void SearchWalkPoint()
- {
-     int m = Random.Range(1, 3);
-     float randomZ = Random.Range(-walkPointRange, walkPointRange);
-     float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-     //int Random = Random.Range(1, 3);
-     walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-     if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-         walkPointSet = true;
- }
- private void ChasePlayer()
- {
-     isChasing = true;
-     agent.SetDestination(player.position);
- }
- // Start is called once before the first execution of Update after the MonoBehaviour is created
-
- // Update is called once per frame
- private void OnTriggerEnter(Collider other)
- {
-
- }
-
-
-}
-*/
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -155,108 +10,155 @@ public class TestEnemyAIScript : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     public Collider enemyCollider;
-
-    //patrol (waypoints)
     public Transform[] patrolPoints;
-    int patrolIndex;
-    bool patrolDestinationSet;
-
-    public float sightRange;
+    public float sightRange = 22;
     public bool playerInSightRange;
-
     public PlayerInteractor interactor;
     public Animator enemyAnim;
-    public bool isChasing = false;
+    public bool isChasing;
     public SpriteRenderer ExclamationMark;
     public AudioSource spottedAudio;
+    public float patrolSpeed = 4.8f;
+    public float chaseSpeed = 6.6f;
 
-    private void Awake()
+    int patrolIndex;
+    float destinationTimer;
+    float searchTime;
+    Vector3 searchPosition;
+    Vector3 progressPosition;
+    float stuckTime;
+
+    void Awake()
     {
-        ExclamationMark.enabled = false;
-        enemy = GetComponent<Transform>();
-        enemySprite = GetComponentInChildren<SpriteRenderer>();
-        enemyAnim = GetComponentInChildren<Animator>();
-        player = GameObject.Find("Player").transform;
+        enemy = transform;
         agent = GetComponent<NavMeshAgent>();
         enemyCollider = GetComponent<Collider>();
+        enemySprite = GetComponentInChildren<SpriteRenderer>();
+        enemyAnim = GetComponentInChildren<Animator>();
         interactor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteractor>();
-        GameObject[] points = GameObject.FindGameObjectsWithTag("PatrolPoint");
-        patrolPoints = new Transform[points.Length];
-        for (int i = 0; i < points.Length; i++)
+        player = interactor.transform;
+        ExclamationMark.enabled = false;
+        if (patrolPoints == null || patrolPoints.Length == 0)
         {
-            patrolPoints[i] = points[i].transform;
+            var points = GameObject.FindGameObjectsWithTag("PatrolPoint");
+            System.Array.Sort(points,(a,b) => string.CompareOrdinal(a.name,b.name));
+            patrolPoints = new Transform[points.Length];
+            for(int i=0;i<points.Length;i++) { patrolPoints[i] = points[i].transform; }
         }
+        progressPosition = transform.position;
     }
 
     void Update()
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-
-        if (!playerInSightRange) Patrolling();
-        if (playerInSightRange && !interactor.playerInsideVent) ChasePlayer();
-
-        UpdateEnemySpriteSheet();
-    }
-
-    public void UpdateEnemySpriteSheet()
-    {
-        Vector3 vel = agent.velocity;
-        if (vel.magnitude < 0.1f)
+        if (!agent.enabled || !agent.isOnNavMesh) { return; }
+        if (!interactor.LMS.canInput)
         {
-            enemyAnim.SetBool("isWalking", false);
-            // idle state
+            agent.isStopped = true;
             return;
+        }
+        agent.isStopped = false;
+        playerInSightRange = !interactor.playerInsideVent && Vector3.Distance(transform.position,player.position) < sightRange;
+        if (playerInSightRange)
+        {
+            Vector3 from = transform.position + Vector3.up * 1.5f;
+            Vector3 to = player.position + Vector3.up * 1.5f;
+            RaycastHit hit;
+            if (Physics.Raycast(from,(to-from).normalized,out hit,Vector3.Distance(from,to),~0,QueryTriggerInteraction.Ignore))
+            {
+                playerInSightRange = hit.collider.GetComponentInParent<PlayerInteractor>() == interactor;
+            }
+        }
+        if (playerInSightRange)
+        {
+            if (!isChasing) { StartCoroutine(Spotted()); }
+            isChasing = true;
+            searchPosition = player.position;
+            searchTime = 2.5f;
         }
         else
         {
-            enemyAnim.SetBool("isWalking", true);
+            isChasing = false;
+            searchTime -= Time.deltaTime;
         }
-        if (vel.x > 0.1f) enemySprite.flipX = false;
-        else if (vel.x < -0.1f) enemySprite.flipX = true;
-    }
-    private void Patrolling()
-    {
-        isChasing = false;
-        if (patrolPoints == null || patrolPoints.Length == 0)
-            return;
-
-        if (!patrolDestinationSet)
+        if (interactor.playerInsideVent) { searchTime = 0; }
+        agent.speed = searchTime > 0 ? chaseSpeed : patrolSpeed;
+        destinationTimer -= Time.deltaTime;
+        if (destinationTimer <= 0)
         {
-            agent.SetDestination(patrolPoints[patrolIndex].position);
-            patrolDestinationSet = true;
-            return;
+            destinationTimer = .35f;
+            if (searchTime > 0)
+            {
+                if (!GoTo(searchPosition)) { searchTime = 0; Patrol(); }
+            }
+            else { Patrol(); }
         }
+        if (Vector3.Distance(progressPosition,transform.position) > .2f)
+        {
+            progressPosition = transform.position;
+            stuckTime = 0;
+        }
+        else if (agent.hasPath && !agent.pathPending && agent.remainingDistance > 1)
+        {
+            stuckTime += Time.deltaTime;
+            if (stuckTime > 1.5f)
+            {
+                agent.ResetPath();
+                searchTime = 0;
+                if (patrolPoints.Length > 0) { patrolIndex = (patrolIndex + 1) % patrolPoints.Length; }
+                destinationTimer = 0;
+                stuckTime = 0;
+            }
+        }
+        UpdateEnemySpriteSheet();
+    }
 
-        if (!agent.pathPending &&
-            agent.remainingDistance <= agent.stoppingDistance + 0.2f)
+    bool GoTo(Vector3 position)
+    {
+        NavMeshHit hit;
+        var path = new NavMeshPath();
+        if (!NavMesh.SamplePosition(position,out hit,2,agent.areaMask)) { return false; }
+        if (!agent.CalculatePath(hit.position,path) || path.status != NavMeshPathStatus.PathComplete) { return false; }
+        return agent.SetPath(path);
+    }
+    void Patrol()
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0) { return; }
+        Vector3 distance = Vector3.zero;
+        if (patrolPoints[patrolIndex] != null)
+        {
+            distance = patrolPoints[patrolIndex].position - transform.position;
+            distance.y = 0;
+        }
+        if (patrolPoints[patrolIndex] == null || distance.sqrMagnitude < 1)
         {
             patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            agent.SetDestination(patrolPoints[patrolIndex].position);
         }
-    }
-
-    private void ChasePlayer()
-    {
-        if (!isChasing)                 // only the moment it first spots the player
+        for(int i=0;i<patrolPoints.Length;i++)
         {
-            isChasing = true;
-            StartCoroutine(Spotted());
+            if (patrolPoints[patrolIndex] != null && GoTo(patrolPoints[patrolIndex].position)) { return; }
+            patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
         }
-        //StartCoroutine(Spotted());
-        //isChasing = true;
-        patrolDestinationSet = false;
-        agent.SetDestination(player.position);
+        agent.ResetPath();
     }
-
-    private void OnTriggerEnter(Collider other)
+    public void HearToken(Vector3 position)
     {
-
+        if (Vector3.Distance(transform.position,position) > 45) { return; }
+        searchPosition = position;
+        searchTime = 5;
+        destinationTimer = 0;
+    }
+    public void UpdateEnemySpriteSheet()
+    {
+        Vector3 movement = agent.velocity;
+        enemyAnim.SetBool("isWalking",movement.sqrMagnitude > .01f);
+        if (movement.x > .1f) { enemySprite.flipX = false; }
+        if (movement.x < -.1f) { enemySprite.flipX = true; }
     }
     IEnumerator Spotted()
     {
         ExclamationMark.enabled = true;
         spottedAudio.Play();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(.7f);
         ExclamationMark.enabled = false;
     }
 }

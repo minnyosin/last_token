@@ -8,12 +8,20 @@ public class PlayerCameraChangeScript : MonoBehaviour
     public GameObject cineMachine3rd;
 
     public bool isSwitching=false;
+    SpriteRenderer playerSprite;
 
     [SerializeField] private InputActionReference interactionReference;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerSprite = GetComponent<PlayerMovement>().playerSprite;
+    }
+    void LateUpdate()
+    {
+        if (playerSprite != null)
+        {
+            playerSprite.enabled = !cineMachine1st.activeSelf;
+        }
     }
     private void OnEnable()
     {
